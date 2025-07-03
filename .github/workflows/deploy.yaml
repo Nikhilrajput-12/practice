@@ -31,6 +31,7 @@ jobs:
       run: |
          ssh -i ssh-key.pem -o StrictHostKeyChecking=no ubuntu@3.109.213.74 << 'EOF'
            cd /var/www/html
+           git config --global --add safe.directory /var/www/html
            if [ -d .git ]; then
              git pull origin main
            else
