@@ -35,7 +35,7 @@ jobs:
            if [ -d .git ]; then
              git pull origin main
            else
-             echo "Error: Not  git repo"
+             echo "Error Not  git repo"
              exit 1
            fi
          EOF
