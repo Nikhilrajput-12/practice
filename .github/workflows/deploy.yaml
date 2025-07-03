@@ -29,8 +29,12 @@ jobs:
 
     - name: SSH to server and pull from GitHub
       run: |
-        ssh -i ssh-key.pem -o StrictHostKeyChecking=no ubuntu@3.109.213.74 << 'EOF'
-          cd /var/www/html
-          git pull origin main
-        EOF
-    
+         ssh -i ssh-key.pem -o StrictHostKeyChecking=no ubuntu@3.109.213.74 << 'EOF'
+           cd /var/www/html
+           if [ -d .git ]; then
+             git pull origin main
+           else
+             echo "Error: Not a git repo"
+             exit 1
+           fi
+         EOF
