@@ -5,27 +5,26 @@ on:
     branches:
       - main
 
-jobs: 
-  deploy:
-    runs-on: ubuntu-latest
 
+jobs:
+  Hello:
+   runs-on: ubuntu-latest
+   steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
 
-    steps:
-      - name: checkout code
-        uses: actions/checkout@v4
-        
+    - name: Checking directory
+      run: ls -lah
 
-      - name: Set up SSH key
-        env:
-          SSH_KEY: ${{ secrets.SSH_KEY }}
-        run: |
-          echo "$SSH_KEY"  >> ssh-key.pem
-          chmod 400 ssh-key.pem
+    - name: Checking secret
+      env:
+        SSH_KEY: ${{ secrets.SSH_KEY }}
+      run: |
+        echo "$SSH_KEY" >> ssh-key.pem
+        chmod 400 ssh-key.pem
 
-      - name: copy to server 
-        run: scp -i ssh-key.pem -o StrictHostKeyChecking=no index.html ubuntu@3.109.213.74:./
+    - name: Copy to server
+      run: scp -i ssh-key.pem -o StrictHostKeyChecking=no index.html ubuntu@3.109.213.74:./
 
-      - name: SSh server
-        run: ssh -i ssh-key.pem -o StrictHostKeyChecking=no ubuntu@3.109.213.74 "sudo cp index.html  /var/www/html"
-
-        
+    - name: SSH to server
+      run: ssh -i ssh-key.pem -o StrictHostKeyChecking=no ubuntu@3.109.213.74 "sudo cp index.html /var/www/html/"
