@@ -26,6 +26,6 @@ jobs:
         run: scp -i ssh-key.pem -o StrictHostKeyChecking=no index.html ubuntu@3.109.213.74:./
 
       - name: SSh server
-        run: ssh -i ssh-key.pem -o StrictHostKeyChecking=no ubuntu@3.109.213.74"sudo cp index.html   /var/www/html"
+        run: ssh -i ssh-key.pem -o StrictHostKeyChecking=no ubuntu@3.109.213.74 "sudo cp index.html  /var/www/html"
 
         
