@@ -24,12 +24,12 @@ jobs:
         chmod 400 ssh-key.pem
 
     # - name: Copy to server
-    #   run: scp -i ssh-key.pem -o StrictHostKeyChecking=no index.html ubuntu@3.109.213.74:./
+    #   run: scp -i ssh-key.pem -o StrictHostKeyChecking=no index.html ubuntu@13.235.87.255 :./
     
 
     - name: SSH to server and pull from GitHub
       run: |
-         ssh -i ssh-key.pem -o StrictHostKeyChecking=no ubuntu@3.109.213.74 << 'EOF'
+         ssh -i ssh-key.pem -o StrictHostKeyChecking=no ubuntu@13.235.87.255 << 'EOF'
            cd /var/www/html
            git config --global --add safe.directory /var/www/html
            if [ -d .git ]; then
